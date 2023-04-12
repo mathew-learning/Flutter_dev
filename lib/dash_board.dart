@@ -1,11 +1,29 @@
+import 'package:cs_app/fields.dart';
+import 'package:cs_app/jus_login.dart';
+import 'package:cs_app/dash_board.dart';
 import 'package:flutter/material.dart';
+////import 'home_page.dart';
+import 'download_reports.dart';
+import 'pro.dart';
+import 'download_reports.dart';
+import 'settings.dart';
+import 'jus_login.dart';
+import 'fields.dart';
 
-import 'data_base.dart';
-import 'display_data.dart';
+
 
 
 
 class DashBoard extends StatefulWidget {
+  // ///final String title;
+
+  // const DashBoard({
+  //   required this.title,
+  // });
+
+  void dashBoardOption(){
+    Text('Building');
+  }
 
 
   @override
@@ -13,176 +31,97 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
+  int index = 0;
+  bool isExtended = false;
 
-  void dashBoardOption(){
-    Text('Building');
-  }
+  final selectedColor = Colors.white;
+  final unselectedColor = Colors.white60;
+  final labelStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 16);
 
   @override
-  Widget build(BuildContext context) {
-          final theme =  Theme.of(context);
-
-    return Scaffold(
-        
-        backgroundColor: theme.colorScheme.surface,
-
-        body: Row(children: [
-          SafeArea(
-            child:
-             NavigationRail(
-              extended: true,
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          // title: Text(widget.title),
+        ),
+        body: Row(
+          children: [
+            NavigationRail(
+              backgroundColor: Theme.of(context).primaryColor,
+              labelType: NavigationRailLabelType.all,
+              selectedIndex: index,
+              extended: isExtended,
+              groupAlignment: 0,
+              selectedLabelTextStyle: labelStyle.copyWith(color: selectedColor),
+              unselectedLabelTextStyle:
+                  labelStyle.copyWith(color: unselectedColor),
+              selectedIconTheme: IconThemeData(color: selectedColor, size: 50),
+              unselectedIconTheme:
+                  IconThemeData(color: unselectedColor, size: 50),
+              onDestinationSelected: (index) =>
+                  setState(() => this.index = index),
               destinations: [
                 NavigationRailDestination(
-                  icon: Icon(Icons.home),
-                  label: Text('Home'),
+                  icon: Icon(Icons.admin_panel_settings_rounded),
+                  selectedIcon: Icon(Icons.admin_panel_settings_outlined),
+                  label: Text('Admin'),
                 ),
                 NavigationRailDestination(
-                  icon: Icon(Icons.abc_rounded),
-                  label: Text('Favorites'),
+                  icon: Icon(Icons.download_for_offline_rounded),
+                  selectedIcon: Icon(Icons.download_for_offline_rounded),
+                  label: Text('Reports'),
+                  
                 ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.abc_rounded),
-                  label: Text('option2'),
-                ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.abc_sharp),
-                  label: Text('option2'),
-                ),
-              ], selectedIndex: null,
-              
-            ),
-          ),
-         Expanded(
-            child: Container(
-              child: dashboardPageOne(),
-            ),
-          ),]
 
-        )
-      
-      
-   
-    );
+                NavigationRailDestination(
+                  icon: Icon(Icons.settings_accessibility_outlined),
+                  selectedIcon: Icon(Icons.settings_accessibility_rounded),
+                  label: Text('Settings'),
+                ),
+
+                NavigationRailDestination(
+                  icon: Icon(Icons.person_2_outlined),
+                  selectedIcon: Icon(Icons.person_2_rounded),
+                  label: Text('Profile'),
+                ),
+                
+                NavigationRailDestination(
+                  icon: Icon(Icons.logout_outlined),
+                  label: Text('Logout'),
+                ),
+                
+              ],
+            ),
+            Expanded(child: buildPages()),
+    
+            // Container(
+            //   child: MyCustomForm(),
+            // ),
+          
+          ],
+        ),
+      );
+
+  Widget buildPages() {
+    switch (index) {
+      case 0:
+        return NamePage();
+      case 1:
+        return DownloadReportsPage();
+      case 2:
+        return SettingsPage();
+      case 3:
+        return ProfilePage();
+      case 4:
+        return LoginPage();
+      default:
+        return NamePage();
+    }
   }
 }
 
-class dashboardPageOne extends StatelessWidget{
-    final companyName = TextEditingController();
-    final state = TextEditingController();
-    final city = TextEditingController();
-    final address = TextEditingController();
-    final contact = TextEditingController();
-    final email = TextEditingController();
+          
+         
     
 
+  
 
- 
-
-
-  @override
-  Widget build(BuildContext context) {
-    return  
-
-          Column(
-            
-  children: [TextField(
-              keyboardType: TextInputType.text,
-              controller: companyName,
-
-              decoration: InputDecoration(
-              hintText: 'Company Name',
-              border: OutlineInputBorder(),
-              
-            ),
-            
-            ),
-          TextField(
-              
-              keyboardType: TextInputType.visiblePassword,
-              controller: state,
-
-              decoration: InputDecoration(
-              hintText: 'State',
-              border: OutlineInputBorder(),
-              
-            ),
-            
-            ),
-            TextField(
-              
-              keyboardType: TextInputType.visiblePassword,
-              controller: city,
-
-              decoration: InputDecoration(
-              hintText: 'City',
-              border: OutlineInputBorder(),
-              
-            ),
-            
-            ),
-            TextField(
-              
-              keyboardType: TextInputType.visiblePassword,
-              controller: address,
-
-              decoration: InputDecoration(
-              hintText: 'Address',
-              border: OutlineInputBorder(),
-              
-            ),
-            
-            ),
-            TextField(
-              
-              keyboardType: TextInputType.visiblePassword,
-              controller: contact,
-
-              decoration: InputDecoration(
-              hintText: 'Contact',
-              border: OutlineInputBorder(),
-              
-            ),
-            
-            ),
-            TextField(
-              
-              keyboardType: TextInputType.visiblePassword,
-              controller: email,
-
-              decoration: InputDecoration(
-              hintText: 'Email',
-              border: OutlineInputBorder(),
-              
-            ),
-            
-            ),
-            
-            // TextField(
-              
-            //   keyboardType: TextInputType.visiblePassword,
-            //   decoration: InputDecoration(
-            //   hintText: 'Password',
-            //   border: OutlineInputBorder(),
-              
-            // ),
-            
-            // ),
-            const SizedBox(height: 16.0),
-          ElevatedButton(onPressed:(){
-              dbConnections(companyName.text,state.text,city.text,address.text,contact.text,email.text);
-              Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => DisplayDataPage()),
-            );
-            
-          },
-  child: const Text('Submit')),
-    
-    
-  ],
-);
-   
-
-  }
-
-}
