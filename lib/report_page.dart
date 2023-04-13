@@ -22,17 +22,32 @@ class _ResultsState extends State<RESULTS> {
         
         backgroundColor: theme.colorScheme.surface,
 
-        body: Column(children: [
-          ElevatedButton(
-            child: Text('Reports'),onPressed: (){
-              Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => DisplayDataPage()),
-            );
-            },
-          ),
+        body: Container(
+          decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Colors.blueGrey[200] ?? Colors.grey,
+  Colors.grey[100] ?? Colors.white,
 
-        ],)
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+          child: Center(
+            child: Column(children: [
+              ElevatedButton(
+                child: Text('Reports'),onPressed: (){
+                  Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DisplayDataPage()),
+                );
+                },
+              ),
+          
+            ],),
+          ),
+        )
       
       
    

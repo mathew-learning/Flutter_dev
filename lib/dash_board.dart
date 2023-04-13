@@ -1,16 +1,13 @@
-import 'package:cs_app/fields.dart';
-import 'package:cs_app/jus_login.dart';
-import 'package:cs_app/dash_board.dart';
+
 import 'package:flutter/material.dart';
 ////import 'home_page.dart';
 import 'download_reports.dart';
 import 'pro.dart';
 import 'download_reports.dart';
 import 'settings.dart';
-import 'jus_login.dart';
+import 'login_page.dart';
 import 'fields.dart';
-
-
+import 'logout.dart';
 
 
 
@@ -39,14 +36,42 @@ class _DashBoardState extends State<DashBoard> {
   final labelStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 16);
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          // title: Text(widget.title),
+  Widget build(BuildContext context) => Scaffold(appBar: PreferredSize(
+          preferredSize: Size.fromHeight(100.0),
+          child: AppBar(
+            title: Icon(Icons.logo_dev_outlined,size: 90.0),
+            backgroundColor: Color.fromARGB(255, 13, 13, 13),
+            leading: IconButton(
+              icon: Icon(Icons.menu),
+              onPressed: () {
+                // Handle the press event for the leading icon
+              },
+            ),
+            actions: [
+              
+              IconButton(
+                icon: Icon(Icons.notifications),
+                onPressed: () {
+                  // Handle the press event for the notifications icon
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.logout_rounded),
+                onPressed: () {Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                  );
+                  // Handle the press event for the search icon
+                },
+              ),
+            ],
+          ),
         ),
+        
         body: Row(
           children: [
             NavigationRail(
-              backgroundColor: Theme.of(context).primaryColor,
+              backgroundColor:  Color.fromARGB(255, 13, 13, 13),
               labelType: NavigationRailLabelType.all,
               selectedIndex: index,
               extended: isExtended,
@@ -112,7 +137,7 @@ class _DashBoardState extends State<DashBoard> {
       case 3:
         return ProfilePage();
       case 4:
-        return LoginPage();
+        return Logout();
       default:
         return NamePage();
     }

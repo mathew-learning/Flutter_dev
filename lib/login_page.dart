@@ -5,8 +5,7 @@ import 'fields.dart';
 
 
 class LoginPage extends StatefulWidget {
-    const LoginPage({Key? key, required this.title});
-    final String title;
+
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -37,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
         // Valid credentials
         Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => NamePage()),
+              MaterialPageRoute(builder: (context) => DashBoard()),
             );
       } else {
         // Invalid credentials
@@ -52,8 +51,25 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return
+    Scaffold(appBar: PreferredSize(
+          preferredSize: Size.fromHeight(100.0),
+          child: AppBar(
+            title: Icon(Icons.logo_dev_outlined,size: 200.0),
+            backgroundColor: Color.fromARGB(255, 13, 13, 13),
+            leading: IconButton(
+              icon: Icon(Icons.menu),
+              onPressed: () {
+                // Handle the press event for the leading icon
+              },
+            ),
+            actions: [
+              
+              
+            ],
+          ),
+        ),
       
-      Container(
+      body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -68,11 +84,12 @@ class _LoginPageState extends State<LoginPage> {
         child: Center(
           child: Container(
             width: 300,
-            height: 200,
+            height: 400,
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Color.fromARGB(255, 228, 220, 228),
               borderRadius: BorderRadius.circular(10),
+              
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
@@ -83,19 +100,47 @@ class _LoginPageState extends State<LoginPage> {
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: [Icon(Icons.logo_dev_outlined,size: 200.0),
                 TextField(
-                  controller: _usernameController,
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(hintText: 'Username'),
-                ),
+      controller: _usernameController,
+      decoration: InputDecoration(
+
+        labelText: 'Username',
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.black),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.black),
+        ),
+      ),
+    ),
+                // TextField(
+                  
+                //   controller: _usernameController,
+                //   textAlign: TextAlign.center,
+                //   decoration: InputDecoration(hintText: 'Username'),
+                // ),
                 SizedBox(height: 10),
+                // TextField(
+                //   controller: _passwordController,
+                //   textAlign: TextAlign.center,
+                //   obscureText: true,
+                //   decoration: InputDecoration(hintText: 'Password'),
+                // ),
                 TextField(
-                  controller: _passwordController,
-                  textAlign: TextAlign.center,
-                  obscureText: true,
-                  decoration: InputDecoration(hintText: 'Password'),
-                ),
+      controller: _passwordController,
+      obscureText: true,
+      decoration: InputDecoration(
+
+        labelText: 'Password',
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.black),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.black),
+        ),
+      ),
+    ),
                 SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: _validateCredentials,
@@ -105,7 +150,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ),
-      );
-    
+      ),
+    );
   }
 }
